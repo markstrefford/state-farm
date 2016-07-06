@@ -14,7 +14,7 @@ See https://www.kaggle.com/c/state-farm-distracted-driver-detection for more det
 This project is based on Python 2.7 with the following plugins / frameworks
 
 1. Caffe http://caffe.berkeleyvision.org
-1. OpenCV http://opencv.org
+1. OpenCV v2.4.13 http://opencv.org
 
 
 
