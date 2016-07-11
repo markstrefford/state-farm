@@ -3,13 +3,15 @@
 # Create the lmdb inputs from the train, validate and test files
 # N.B. set the path to the imagenet train + val data dirs
 
-EXAMPLE=examples/imagenet
-DATA=data/ilsvrc12
+LMDB=examples/imagenet
+DATA=images
 TOOLS=$CAFFE_HOME/build/tools
 
-TRAIN_DATA_ROOT=../images/train/
-VAL_DATA_ROOT=../images/validate/
-TEST_DATA_ROOT=../images/test/
+# For now assume that we'll use the original images and resize and split here,
+# (as C is quicker than python!)
+TRAIN_DATA_ROOT=../imgs
+VAL_DATA_ROOT=../imgs
+TEST_DATA_ROOT=../imgs
 
 # Set RESIZE=true to resize the images to 256x256. Leave as false if images have
 # already been resized using another tool.
@@ -44,16 +46,18 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --shuffle \
     $TRAIN_DATA_ROOT \
     $DATA/train.txt \
-    $EXAMPLE/ilsvrc12_train_lmdb
+    $LMDB/statefarm_train_lmdb
 
-echo "Creating val lmdb..."
+echo "Creating validate lmdb..."
 
 GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_height=$RESIZE_HEIGHT \
     --resize_width=$RESIZE_WIDTH \
     --shuffle \
     $VAL_DATA_ROOT \
-    $DATA/val.txt \
-    $EXAMPLE/ilsvrc12_val_lmdb
+    $DATA/validate.txt \
+    $LMDB/statefarm_validate_lmdb
+
+# TODO: Add in test data here too!
 
 echo "Done."
