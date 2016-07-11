@@ -4,3 +4,6 @@ capstore-rubric.pdf
 .ipynb_checkpoints/
 kaggle
 *.caffemodel
+*mdb
+*jpeg
+*jpg
