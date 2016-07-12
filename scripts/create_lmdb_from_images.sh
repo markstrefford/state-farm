@@ -39,6 +39,15 @@ if [ ! -d "$VAL_DATA_ROOT" ]; then
 fi
 
 # Remove old databases otherwise convert_imageset fails!
+if [ -d "$LMDB/train_lmdb" ]; then
+    echo "Removing existing train_lmdb"
+    rm -fr data/state-farm/train_lmdb
+fi
+
+if [ -d "$LMDB/validate_lmdb" ]; then
+    echo "Removing existing validate_lmdb"
+    rm -fr data/state-farm/validate_lmdb
+fi
 
 echo "Creating train lmdb..."
 
