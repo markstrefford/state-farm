@@ -13,11 +13,37 @@ See https://www.kaggle.com/c/state-farm-distracted-driver-detection for more det
 
 This project is based on Python 2.7 with the following plugins / frameworks
 
+1. pandas
+1. numpy
+1. matplotlib
+1. pydot-ng
+1. graphviz
 1. Theano
 1. Keras
 1. OpenCV v2.4.13 http://opencv.org
-1. pip install pydot-ng
-1. Theano
+
+## Running the model
+
+### Data Files
+Download the data files from 
+https://www.kaggle.com/c/state-farm-distracted-driver-detection/data 
+and extract into the root folder of this project
+
+### Pre-processing the images
+This script will pre-process the images
+python ./pre-process-images.py
+
+### Training the model
+
+
+
+
+### Testing and submitting data to Kaggle
+
+
+
+
+### Manual testing
 
 
 ## Classes of data
@@ -34,6 +60,7 @@ c6: drinking
 c7: reaching behind
 c8: hair and makeup
 c9: talking to passenger
+
 
 
 
