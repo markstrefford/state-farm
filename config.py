@@ -34,7 +34,10 @@ def get_driver_list():
 
 # Get a list of all the test images
 def get_test_image_list():
-    return os.listdir(image_root_dir + test_image_source_dir)
+    test_images_list = os.listdir(image_root_dir + test_image_source_dir)
+    print "Total number of test images found {}".format(len(test_images_list))
+    return test_images_list
+
 
 # Create a list of images and classes for the training set
 # images, classes = get_driver_images_and_classes(driver_list)
