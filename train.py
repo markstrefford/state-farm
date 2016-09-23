@@ -4,6 +4,7 @@ Train the model
 
 import config
 import numpy as np
+import pandas as pd
 from keras.utils import np_utils
 import cv2
 from keras.models import Sequential
@@ -15,13 +16,14 @@ from keras.callbacks import Callback
 import matplotlib.pyplot as plt
 
 def split_drivers_into_train_and_validate(driver_list, split = 0.95):
+    print "split_drivers_into_train_and_validate(): "
     driver_valid_list = []
     # Take a random sample of drivers into the training list
     driver_train_list = np.random.choice(driver_list, int(len(driver_list ) *split), replace = False)
     # Take the remaining drivers into the validation list
     driver_valid_list = [ driver for driver in driver_list if driver not in driver_train_list]
-    print "Driver train list: {}".format(training_list)
-    print "Driver validation list: {}".format(validation_list)
+    print "Driver train list: {}".format(driver_train_list)
+    print "Driver validation list: {}".format(driver_valid_list)
     return driver_train_list, driver_valid_list
 
 def create_train_validation_data(driver_list, filter):
@@ -29,8 +31,7 @@ def create_train_validation_data(driver_list, filter):
     images = []
     labels = []
     total = 0
-    for driver_row in [drvr for drvr in driver_list[driver_list.subject.isin(filter)].ix[:,
-                                        'classname':'img'].iterrows()]:  # if drvr[1]['subject'] in filter
+    for driver_row in [drvr for drvr in driver_list[driver_list.subject.isin(filter)].ix[:, 'classname':'img'].iterrows()]:
         driver = driver_row[1]  # Drop the index created by the Pandas Dataframe
         # print driver
         label = int(driver['classname'][1:])
@@ -44,9 +45,9 @@ def create_train_validation_data(driver_list, filter):
         images.append(image)
         labels.append(label)
         total += 1
-        if total % 100 == 0:
-            print ".",
-    print "\nProcessed {} rows.".format(total)
+        if total % 1000 == 0:
+            print "Processed {} samples".format(total)
+    print "Processed {} training samples...Done!\n".format(total)
 
     # TODO - Is this sufficient normalisation??
     images = np.array(images, dtype=np.uint8)
@@ -116,8 +117,11 @@ def graph_training_loss_history(losses):
     plt.show()
 
 # Split the driver list into training and validation sets
-driver_list = config.get_driver_ids()
-training_list, validation_list = split_drivers_into_train_and_validate(driver_list)
+driver_list = pd.read_csv(config.driver_image_list)
+print "Sample training data: {}".format(driver_list.head())
+driver_ids = config.get_driver_ids(driver_list)
+print "Driver ids in training set: {}".format(driver_ids)
+training_list, validation_list = split_drivers_into_train_and_validate(driver_ids)
 
 # Now create training and validation data sets
 #

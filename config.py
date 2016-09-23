@@ -56,9 +56,10 @@ def get_driver_images_and_classes(driver_list=get_driver_image_list()):
     return np.array(image_list), np.array(class_list)
 
 # Get a unique list of drivers
-def get_driver_ids(driver_list = get_test_image_list()):
+def get_driver_ids(driver_list = get_driver_image_list()):
     driver_ids = []
     for id, driver in driver_list.iterrows():
         if driver['subject'] not in driver_ids:
             driver_ids.append(driver['subject'])
     print "Found {} drivers: {}".format(len(driver_ids), driver_ids)
+    return driver_ids
