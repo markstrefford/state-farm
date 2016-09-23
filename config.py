@@ -29,7 +29,7 @@ image_height = 224
 
 
 # Training set is in the provided csv file
-def get_driver_list():
+def get_driver_image_list():
     return pd.read_csv(driver_image_list)
 
 # Get a list of all the test images
@@ -41,7 +41,7 @@ def get_test_image_list():
 
 # Create a list of images and classes for the training set
 # images, classes = get_driver_images_and_classes(driver_list)
-def get_driver_images_and_classes(driver_list=get_driver_list()):
+def get_driver_images_and_classes(driver_list=get_driver_image_list()):
     image_list = []
     class_list = []
     total = 0
@@ -55,3 +55,10 @@ def get_driver_images_and_classes(driver_list=get_driver_list()):
     #Return a list of images and their classification
     return np.array(image_list), np.array(class_list)
 
+# Get a unique list of drivers
+def get_driver_ids(driver_list = get_test_image_list()):
+    driver_ids = []
+    for id, driver in driver_list.iterrows():
+        if driver['subject'] not in driver_ids:
+            driver_ids.append(driver['subject'])
+    print "Found {} drivers: {}".format(len(driver_ids), driver_ids)
