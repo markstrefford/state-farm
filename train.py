@@ -47,7 +47,7 @@ def create_train_validation_data(driver_list, filter):
         total += 1
         if total % 1000 == 0:
             print "Processed {} samples".format(total)
-    print "Processed {} training samples...Done!\n".format(total)
+    print "Processed {} samples...Done!\n".format(total)
 
     # TODO - Is this sufficient normalisation??
     images = np.array(images, dtype=np.uint8)
@@ -161,7 +161,7 @@ model.compile(loss=loss_function, optimizer=sgd)
 
 # Now train the model
 batch_size = 32
-num_epochs = 1
+num_epochs = 5
 
 history = LossHistory()
 #index = np.random.choice(range(0, num_training_samples), num_training_samples, replace = False) # Random ordering

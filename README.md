@@ -34,8 +34,11 @@ This script will pre-process the images
 python ./pre-process-images.py
 
 ### Training the model
+To use the CPU only:
+python train.py
 
-
+To use a GPU:
+THEANO_FLAGS=device=gpu,floatX=float32 python train.py
 
 
 ### Testing and submitting data to Kaggle
