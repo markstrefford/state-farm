@@ -29,24 +29,22 @@ Download the data files from
 https://www.kaggle.com/c/state-farm-distracted-driver-detection/data 
 and extract into the root folder of this project
 
-### Pre-processing the images
-This script will pre-process the images
-python ./pre-process-images.py
 
-### Training the model
+### Using the Python Notebook
+All code for this project is included in the iPython notebook state-farm.ipynb. 
+
 To use the CPU only:
-python train.py
+ipython notebook
 
 To use a GPU:
-THEANO_FLAGS=device=gpu,floatX=float32 python train.py
+THEANO_FLAGS=device=gpu,floatX=float32 ipython notebook
 
 
 ### Testing and submitting data to Kaggle
+Predictions are written to time-stamped files in the submission folder.  These can be uploaded 
+at this URL:
 
-
-
-
-### Manual testing
+https://www.kaggle.com/c/state-farm-distracted-driver-detection/submit
 
 
 ## Classes of data
